@@ -1,4 +1,3 @@
-import SwiftUI
 import XCTest
 @testable import DataStore
 
@@ -31,7 +30,7 @@ final class DataStoreTests: XCTestCase {
         try await store.load()
 
         let values = await store.fetch { data in
-            data.color == Color(red: 0, green: 1, blue: 0)
+            data.color == TestColor(red: 0, green: 1, blue: 0)
         }
 
         XCTAssertEqual(values.count, 1)
@@ -46,7 +45,7 @@ final class DataStoreTests: XCTestCase {
 
         let expectedID = UUID().uuidString
         let expectedUserName = "test"
-        let expectedColor = Color.green
+        let expectedColor = TestColor.green
         let expectedEnumValue = TestDeviceData.DeviceEnum.weirdCaseExample
 
         try await store.store(

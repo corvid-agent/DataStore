@@ -16,7 +16,11 @@ import Cache
  - SeeAlso: `Identifiable`
  - SeeAlso: `Cache`
  */
+#if canImport(Combine)
 open class DataStore<DataLoader: DataLoading>: ConsumingObservableObject, DataStoring where DataLoader.DeviceData.To == DataLoader.DeviceData.StoredValue {
+#else
+open class DataStore<DataLoader: DataLoading>: DataStoring, @unchecked Sendable where DataLoader.DeviceData.To == DataLoader.DeviceData.StoredValue {
+#endif
 
     /// A typealias that represents the type of data loaded by the DataLoader.
     public typealias LoadedData = DataLoader.LoadedData
@@ -47,10 +51,12 @@ open class DataStore<DataLoader: DataLoading>: ConsumingObservableObject, DataSt
     ) {
         self.cache = Cache(initialValues: initalValues)
         self.loader = loader
-        
+
+        #if canImport(Combine)
         super.init()
-        
+
         consume(object: cache)
+        #endif
     }
 
     /**
@@ -108,7 +114,7 @@ open class DataStore<DataLoader: DataLoading>: ConsumingObservableObject, DataSt
 
      - Note: This method filters the fetched data using the given filter closure and returns the filtered results.
      */
-    open func fetch(where filter: (DeviceData) -> Bool) async -> [DeviceData] {
+    open func fetch(where filter: @Sendable (DeviceData) -> Bool) async -> [DeviceData] {
         let allValues = await fetch()
 
         let filteredValues = allValues.filter(filter)

@@ -1,6 +1,21 @@
 # DataStore
 
+[![macOS Build](https://img.shields.io/github/actions/workflow/status/0xLeif/DataStore/macOS.yml?label=macOS&branch=main)](https://github.com/0xLeif/DataStore/actions/workflows/macOS.yml)
+[![Ubuntu Build](https://img.shields.io/github/actions/workflow/status/0xLeif/DataStore/ubuntu.yml?label=Ubuntu&branch=main)](https://github.com/0xLeif/DataStore/actions/workflows/ubuntu.yml)
+[![Windows Build](https://img.shields.io/github/actions/workflow/status/0xLeif/DataStore/windows.yml?label=Windows&branch=main)](https://github.com/0xLeif/DataStore/actions/workflows/windows.yml)
+[![License](https://img.shields.io/github/license/0xLeif/DataStore)](https://github.com/0xLeif/DataStore/blob/main/LICENSE)
+[![Version](https://img.shields.io/github/v/release/0xLeif/DataStore)](https://github.com/0xLeif/DataStore/releases)
+
 *An extendable data storage solution with built-in caching capabilities.*
+
+## Requirements
+
+- **iOS**: 13.0+
+- **watchOS**: 6.0+
+- **macOS**: 10.15+
+- **tvOS**: 13.0+
+- **visionOS**: 1.0+
+- **Swift**: 6.0+
 
 ## What is DataStore?
 
@@ -13,6 +28,7 @@
 - **Flexible Data Retrieval**: Access loaded data via the `fetch()` method or fetch data based on specific criteria using closure-based filtering.
 - **Data Storage**: Store new data objects into the `DataStore` for later retrieval.
 - **Data Deletion**: Remove previously stored data objects from the `DataStore`.
+- **Cross-Platform**: Supports macOS, iOS, watchOS, tvOS, visionOS, Ubuntu, and Windows.
 
 ## Installation
 

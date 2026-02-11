@@ -21,7 +21,7 @@ public protocol DataStoring {
     /// Fetches stored `DeviceData` objects that satisfy the given filter predicate.
     /// - Parameter where: A closure that takes a `DeviceData` object and returns a Boolean value indicating whether the object should be included in the result.
     /// - Returns: An array of fetched device-specific data that pass the filter.
-    func fetch(where filter: (DeviceData) -> Bool) async -> [DeviceData]
+    func fetch(where filter: @Sendable (DeviceData) -> Bool) async -> [DeviceData]
 
     /// Fetches a single stored `DeviceData` object based on its identifier.
     /// - Parameter id: The identifier of the data to fetch.

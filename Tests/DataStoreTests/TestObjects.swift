@@ -1,16 +1,31 @@
 import DataStore
+
+#if canImport(SwiftUI)
 import SwiftUI
+#endif
+
+// MARK: - TestColor
+
+/// A cross-platform color representation for testing.
+struct TestColor: Equatable, Sendable {
+    let red: Double
+    let green: Double
+    let blue: Double
+
+    static let clear = TestColor(red: 0, green: 0, blue: 0)
+    static let green = TestColor(red: 0, green: 1, blue: 0)
+}
 
 // MARK: - TestLoadedData
 
-struct TestLoadedData: Identifiable {
-    struct LoadedColor {
+struct TestLoadedData: Identifiable, Sendable {
+    struct LoadedColor: Sendable {
         let red: Double
         let green: Double
         let blue: Double
     }
 
-    enum LoadedEnum: String {
+    enum LoadedEnum: String, Sendable {
         case WeirdCaseExample
         case inconsistent_example
     }
@@ -23,8 +38,8 @@ struct TestLoadedData: Identifiable {
 
 // MARK: - TestDeviceData
 
-struct TestDeviceData: OnDeviceData {
-    enum DeviceEnum: String, Adaptable {
+struct TestDeviceData: OnDeviceData, Sendable {
+    enum DeviceEnum: String, Adaptable, Sendable {
         case weirdCaseExample
         case inconsistentExample
 
@@ -40,10 +55,10 @@ struct TestDeviceData: OnDeviceData {
 
     let id: String
     var userName: String
-    var color: Color
+    var color: TestColor
     var enumValue: DeviceEnum
 
-    init(id: String, userName: String, color: Color, enumValue: DeviceEnum) {
+    init(id: String, userName: String, color: TestColor, enumValue: DeviceEnum) {
         self.id = id
         self.userName = userName
         self.color = color
@@ -54,7 +69,7 @@ struct TestDeviceData: OnDeviceData {
         self.init(
             id: from.id,
             userName: from.user_name,
-            color: Color(
+            color: TestColor(
                 red: from.color.red,
                 green: from.color.green,
                 blue: from.color.blue
@@ -75,10 +90,10 @@ struct TestDeviceData: OnDeviceData {
 
 // MARK: - StoredData
 
-struct TestStoredData: StorableData {
+struct TestStoredData: StorableData, Sendable {
     let id: String
     let userName: String
-    let color: Color
+    let color: TestColor
     let enumValue: TestDeviceData.DeviceEnum
 
     init(from: TestDeviceData) {
@@ -91,7 +106,7 @@ struct TestStoredData: StorableData {
 
 // MARK: - TestDataLoader
 
-class TestDataLoader: DataLoading {
+final class TestDataLoader: DataLoading, Sendable {
     typealias LoadedData = TestLoadedData
     typealias DeviceData = TestDeviceData
 

@@ -1,5 +1,5 @@
 /// A protocol for loading data asynchronously and adapting it to a desired format using the `Adaptable` protocol.
-public protocol DataLoading {
+public protocol DataLoading: Sendable {
     /// The type of loaded data, which should conform to the `Identifiable` protocol.
     associatedtype LoadedData: Identifiable
 

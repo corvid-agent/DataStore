@@ -2,7 +2,7 @@
 import Combine
 
 /// An `ObservableObject` that can consume and observe changes in other `ObservableObject` instances.
-open class ConsumingObservableObject: ObservableObject {
+open class ConsumingObservableObject: ObservableObject, @unchecked Sendable {
     private var bag: Set<AnyCancellable> = Set()
 
     deinit {
